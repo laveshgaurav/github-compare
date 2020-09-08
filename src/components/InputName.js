@@ -10,7 +10,12 @@ export class InputName extends Component {
       username: "",
       loading: true,
       wrongEntry: false,
+      value: "login",
     };
+
+    this.sortById = this.sortById.bind(this);
+    this.sortByFollowers = this.sortByFollowers.bind(this);
+    this.sortByFollowing = this.sortByFollowing.bind(this);
   }
 
   myChangeHandler = (event) => {
@@ -28,6 +33,7 @@ export class InputName extends Component {
       }));
       this.setState({ loading: false });
       console.log(this.state.profiles);
+      this.setState({ wrongEntry: false });
     } catch (err) {
       console.log(err.message);
       this.setState({ wrongEntry: true });
@@ -36,6 +42,25 @@ export class InputName extends Component {
       username: "",
     });
   };
+  sortById() {
+    var sortedProfile = this.state.profiles.sort((a, b) => a.id - b.id);
+    this.setState({ profiles: [...sortedProfile] });
+    console.log(this.state.profiles);
+  }
+  sortByFollowers() {
+    var sortedProfile = this.state.profiles.sort(
+      (a, b) => a.followers - b.followers
+    );
+    this.setState({ profiles: [...sortedProfile] });
+    console.log(this.state.profiles);
+  }
+  sortByFollowing() {
+    var sortedProfile = this.state.profiles.sort(
+      (a, b) => a.following - b.following
+    );
+    this.setState({ profiles: [...sortedProfile] });
+    console.log(this.state.profiles);
+  }
   render() {
     return (
       <React.Fragment>
@@ -66,6 +91,7 @@ export class InputName extends Component {
             <div
               class="alert alert-danger alert-dismissible fade show"
               role="alert"
+              style={{ margin: "0.4rem" }}
             >
               <p>Profile doesn't exist, search again!</p>
               <button
@@ -80,11 +106,25 @@ export class InputName extends Component {
           </div>
         ) : null}
         {this.state.loading ? (
-          <h2 style={{ color: "#ededed" }}>Search For Profile</h2>
-        ) : null}
+          <div className="container">
+            <h4 style={{ color: "#ededed" }}>Search For Profile</h4>
+          </div>
+        ) : (
+          <div className="container">
+            <button className="submitBtn" onClick={this.sortById}>
+              Sort By Id
+            </button>
+            <button className="submitBtn" onClick={this.sortByFollowers}>
+              Sort By Followers
+            </button>
+            <button className="submitBtn" onClick={this.sortByFollowing}>
+              Sort By Following
+            </button>
+          </div>
+        )}
 
         <div className="profileBox">
-          {this.state.profiles.map((users) => (
+          {this.state.profiles.sort().map((users) => (
             <ProfileCard
               username={users.login}
               id={users.id}
@@ -93,6 +133,8 @@ export class InputName extends Component {
               followers={users.followers}
               following={users.following}
               created={users.created_at}
+              publicRepo={users.public_repos}
+              publicGists={users.public_gists}
             />
           ))}
         </div>

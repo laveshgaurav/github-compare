@@ -32,10 +32,11 @@
 }
 
 .ProfileCard__container .ProfileCard__image {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
+    border: 12px solid #1d1d1d;
     position: absolute;
-    border-radius: 40px;
+    border-radius: 60px;
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -50,7 +51,7 @@
     width: 100%;
     transition: 0.45s ease;
 
-    border-radius: 40px;
+    border-radius: 60px;
 }
 
 .ProfileCard__container .ProfileCard__data {
@@ -63,24 +64,7 @@
     z-index: 9;
 }
 
-/* .ProfileCard__container .ProfileCard__data .ids {
-    position: absolute;
-    transform: rotate(90deg) translateX(15%);
-    right: -50%;
-    top: 50%;
-    top: 50%;
-    font-size: 2rem;
-    font-weight: bold;
-    opacity: 0;
-    transition: 0.45s ease;
 
-}
-
-.ProfileCard__container:hover .ids {
-    transform: rotate(90deg) translateX(-15%);
-
-    opacity: 0.8;
-} */
 
 .ProfileCard__container .ProfileCard__data .link {
     background: linear-gradient(#fdc830, #f37335);
@@ -89,4 +73,13 @@
     text-decoration: none;
     border-radius: 50px;
     margin: 0.8rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .ProfileCard__container {
+        width: 250px;
+        padding: 1rem 0.5rem;
+        margin: 5rem 1rem 1rem 1rem;
+
+    }
 }
